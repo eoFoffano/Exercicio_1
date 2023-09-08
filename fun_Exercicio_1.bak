@@ -1,0 +1,46 @@
+
+#include "fun_head_fast.h"
+
+//Custo de cada firma é uma distribuição normal
+//O preço desejado é o custo unitário presente ajustado por um markup fixo
+//Preço é uma média ponderada entre o preço desejado e o preço médio de mercado no período anterior
+//Os pesos dessa média são uma medida do grau de monopólio da firma
+
+MODELBEGIN
+
+EQUATION("Price")
+
+v[0] = V("degree_of_monopoly");
+v[1] = 1 - v[0];
+v[2] = V("Desired");
+v[3] = VL("Average", 1);
+
+RESULT((v[1]*v[3])+(v[2]*v[4]))
+
+EQUATION("Average")
+RESULT(AVE("Price"))
+
+EQUATION("Desired")
+
+v[0] = V("markup");
+v[1] = V("Cost");
+v[2] = 1 + v[0];
+
+RESULT(v[1]*v[2])
+
+EQUATION("Cost")
+
+v[0] = V("avg");
+v[1] = V("sd");
+v[2] = norm(v[0],v[1]);
+
+RESULT(v[2])
+
+
+MODELEND
+
+
+void close_sim( void )
+{
+	
+}

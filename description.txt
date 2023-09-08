@@ -1,0 +1,6 @@
+Model Exercicio_1 (ver. 1.0)
+
+Simple Price Model
+
+(PRESS CTRL+E TO EDIT EQUATIONS)
+
