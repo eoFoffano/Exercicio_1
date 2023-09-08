@@ -36,9 +36,7 @@ v[2] = norm(v[0],v[1]);
 
 RESULT(v[2])
 
-
 MODELEND
-
 
 void close_sim( void )
 {

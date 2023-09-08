@@ -28,7 +28,7 @@ Var: Price 1 s + n p	1	1	1	1	1
 Var: Average 1 n + n n	1	1	1	1	1
 Var: Desired 0 n + n n
 Var: Cost 0 n + n n
-Param: degree_of_monopoly 0 n + n n	0.9	0.9	0.9	0.9	0.9
+Param: degree_of_monopoly 0 n + n n	0.1	0.1	0.1	0.1	0.1
 Param: markup 0 n + n n	0.5	0.5	0.5	0.5	0.5
 Param: avg 0 n + n n	5	5	5	5	5
 Param: sd 0 n + n n	1	1	1	1	1
@@ -68,7 +68,7 @@ END_DESCRIPTION
 Parameter_degree_of_monopoly
 
 _INIT_
-All 5 instances equal to 0.9
+All 5 instances equal to 0.1
 END_DESCRIPTION
 
 Parameter_markup
