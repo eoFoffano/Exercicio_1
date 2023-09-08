@@ -15,7 +15,7 @@ v[1] = 1 - v[0];
 v[2] = V("Desired");
 v[3] = VL("Average", 1);
 
-RESULT((v[1]*v[3])+(v[2]*v[4]))
+RESULT((v[0]*v[2])+(v[1]*v[3]))
 
 EQUATION("Average")
 RESULT(AVE("Price"))
