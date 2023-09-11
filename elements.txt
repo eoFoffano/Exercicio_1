@@ -1,2 +1,3 @@
 Average Cost Desired Price
 avg degree_of_monopoly markup sd
+FIRM

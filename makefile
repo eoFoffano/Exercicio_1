@@ -12,7 +12,7 @@ SWITCH_CC_LNK=
 
 # System compilation options
 # LSD options
-LSDROOT=E:/LSD
+LSDROOT=C:/Users/Claudia/LSD
 SRC=src
 
 # Libraries options
