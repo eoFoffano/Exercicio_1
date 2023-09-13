@@ -14,10 +14,11 @@ Label Root
 			Param: markup
 			Param: avg
 			Param: sd
-			Var: Average
 
 		}
 
+		Var: Average
+		Var: Maximum
 
 	}
 
@@ -30,16 +31,17 @@ DATA
 Object: Root C	1
 
 Object: SECTOR C	1
+Var: Average 1 s + n n	1
+Var: Maximum 0 s + n n
 
 Object: FIRM C	5
 Var: Price 1 s + n p	1	1	1	1	1
 Var: Desired 0 n + n n
 Var: Cost 0 n + n n
-Param: degree_of_monopoly 0 n + n n	0.1	0.1	0.1	0.1	0.1
+Param: degree_of_monopoly 0 n + n n	0.5	0.5	0.5	0.5	0.5
 Param: markup 0 n + n n	0.5	0.5	0.5	0.5	0.5
 Param: avg 0 n + n n	5	5	5	5	5
 Param: sd 0 n + n n	1	1	1	1	1
-Var: Average 0 s + n n
 
 SIM_NUM 1
 SEED 1
@@ -57,12 +59,24 @@ Object_SECTOR
 
 END_DESCRIPTION
 
+Variable_Average
+
+_INIT_
+All 1 instances equal to 1
+END_DESCRIPTION
+
+Variable_Maximum
+
+END_DESCRIPTION
+
 Object_FIRM
 
 END_DESCRIPTION
 
 Variable_Price
 
+_INIT_
+All 5 instances equal to 1
 END_DESCRIPTION
 
 Variable_Desired
@@ -76,7 +90,7 @@ END_DESCRIPTION
 Parameter_degree_of_monopoly
 
 _INIT_
-All 5 instances equal to 0.1
+All 5 instances equal to 0.5
 END_DESCRIPTION
 
 Parameter_markup
@@ -88,10 +102,6 @@ Parameter_avg
 END_DESCRIPTION
 
 Parameter_sd
-
-END_DESCRIPTION
-
-Variable_Average
 
 END_DESCRIPTION
 
@@ -122,21 +132,25 @@ EQUATION("Price")
 v[0] = V("degree_of_monopoly");
 v[1] = 1 - v[0];
 v[2] = V("Desired");
-
-/*
-v[3] = AVE("Price");
-v[4] = VL(v[3],1);
-*/
-
-//v[3] = VL(AVE("Price"),1);
-
 v[3] = AVEL("Price",1);
 
-//v[3] = VL("Average", 1);
+/*
 
-RESULT((v[0]*v[2])+(v[1]*v[4]))
+	Versão alternativa #1
+	
+v[3] = VL("Average",1);
+
+*/
+
+RESULT((v[0]*v[2])+(v[1]*v[3]))
+
+EQUATION("Average")
+RESULT(AVE("Price"))
 
 /*
+
+	Versao alternativa #2
+	
 EQUATION("Average")
 
 v[0] = 0;
@@ -151,12 +165,8 @@ CYCLE(cur, "FIRM")
 v[3] = v[0]/v[2];
 
 RESULT(v[3])
+
 */
-
-
-EQUATION("Average")
-RESULT(AVE("Price"))
-
 
 EQUATION("Desired")
 
@@ -173,6 +183,25 @@ v[1] = V("sd");
 v[2] = norm(v[0],v[1]);
 
 RESULT(v[2])
+
+EQUATION("Maximum")
+
+v[0] = MAX("Price");
+
+CYCLE(cur, "SECTOR")
+{
+
+	v[1] = SUM_CND("Price","Price","==",v[0]);
+}
+
+RESULT(v[1])
+
+
+
+/*
+EQUATION("Maximum")
+RESULT(MAX("Price"))
+*/
 
 MODELEND
 

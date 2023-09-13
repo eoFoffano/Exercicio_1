@@ -13,21 +13,25 @@ EQUATION("Price")
 v[0] = V("degree_of_monopoly");
 v[1] = 1 - v[0];
 v[2] = V("Desired");
-
-/*
-v[3] = AVE("Price");
-v[4] = VL(v[3],1);
-*/
-
-//v[3] = VL(AVE("Price"),1);
-
 v[3] = AVEL("Price",1);
 
-//v[3] = VL("Average", 1);
+/*
 
-RESULT((v[0]*v[2])+(v[1]*v[4]))
+	Versão alternativa #1
+	
+v[3] = VL("Average",1);
+
+*/
+
+RESULT((v[0]*v[2])+(v[1]*v[3]))
+
+EQUATION("Average")
+RESULT(AVE("Price"))
 
 /*
+
+	Versao alternativa #2
+	
 EQUATION("Average")
 
 v[0] = 0;
@@ -42,12 +46,8 @@ CYCLE(cur, "FIRM")
 v[3] = v[0]/v[2];
 
 RESULT(v[3])
+
 */
-
-
-EQUATION("Average")
-RESULT(AVE("Price"))
-
 
 EQUATION("Desired")
 
@@ -64,6 +64,25 @@ v[1] = V("sd");
 v[2] = norm(v[0],v[1]);
 
 RESULT(v[2])
+
+EQUATION("Maximum")
+
+v[0] = MAX("Price");
+
+CYCLE(cur, "SECTOR")
+{
+
+	v[1] = SUM_CND("Price","Price","==",v[0]);
+}
+
+RESULT(v[1])
+
+
+
+/*
+EQUATION("Maximum")
+RESULT(MAX("Price"))
+*/
 
 MODELEND
 
