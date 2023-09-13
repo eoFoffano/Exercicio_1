@@ -72,7 +72,7 @@ v[0] = MAX("Price");
 CYCLE(cur, "SECTOR")
 {
 
-	v[1] = SUM_CND("Price","Price",==,v[0]);
+	v[1] = SUM_CND("Price","Price","==",v[0]);
 }
 
 RESULT(v[1])

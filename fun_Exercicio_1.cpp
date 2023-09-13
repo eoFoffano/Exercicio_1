@@ -30,7 +30,7 @@ RESULT(AVE("Price"))
 
 /*
 
-	Versao alternativa #2
+	Versão alternativa #2
 	
 EQUATION("Average")
 
@@ -80,8 +80,12 @@ RESULT(v[1])
 
 
 /*
+
+	Versão alternativa #3
+	
 EQUATION("Maximum")
 RESULT(MAX("Price"))
+
 */
 
 MODELEND
