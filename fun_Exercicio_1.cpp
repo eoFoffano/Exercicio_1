@@ -67,6 +67,31 @@ RESULT(v[2])
 
 EQUATION("Maximum")
 
+v[0] = 0;
+
+CYCLE(cur,"FIRM")
+{
+
+	v[1] = VS(cur,"Price");
+	
+	if(v[1]>v[0])
+		
+		{
+		
+		v[0] = v[1];
+		
+		}
+		
+}
+
+RESULT(v[0])
+
+/*
+
+	Versão alternativa #3?
+	
+EQUATION("Maximum")
+
 v[0] = MAX("Price");
 
 CYCLE(cur, "SECTOR")
@@ -77,16 +102,18 @@ CYCLE(cur, "SECTOR")
 
 RESULT(v[1])
 
-
+*/
 
 /*
 
-	Versão alternativa #3
+	Versão alternativa #4
 	
 EQUATION("Maximum")
 RESULT(MAX("Price"))
 
 */
+
+
 
 MODELEND
 
