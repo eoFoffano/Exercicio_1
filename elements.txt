@@ -1,3 +1,3 @@
-Average Cost Desired Maximum Price
-avg degree_of_monopoly markup sd
+Average Competitiveness Consistency_Test Cost CT_Adjusted Desired Market_Share Maximum MS_Adjusted Price Quality
+avg degree_of_monopoly Elast_P Elast_Q markup MS_Adjus sd
 FIRM SECTOR

@@ -11,7 +11,7 @@ MODELBEGIN
 EQUATION("Price")
 
 v[0] = V("degree_of_monopoly");
-v[1] = 1 - v[0];
+v[1] = 1-v[0];
 v[2] = V("Desired");
 v[3] = AVEL("Price",1);
 
@@ -113,7 +113,52 @@ RESULT(MAX("Price"))
 
 */
 
+EQUATION("Quality")
 
+v[0] = VL("Quality",1);
+v[1] = uniform(0, 1);
+v[2] = v[0]+v[1];
+
+RESULT(v[2])
+
+EQUATION("Competitiveness")
+
+v[0] = V("Quality");
+v[1] = V("Price");
+v[2] = V("Elast_Q");
+v[3] = V("Elast_P");
+v[4] = (pow(v[0],v[2]))/(pow(v[1],v[3]));
+
+RESULT(v[4])
+
+EQUATION("Market_Share")
+
+v[0] = VL("Market_Share",1);
+v[1] = V("MS_Adjus");
+v[2] = V("Competitiveness");
+v[3] = AVE("Competitiveness");
+v[4] = (v[2]/v[3]) - 1;
+v[5] = v[0]*(1+(v[1]*v[4]));
+
+RESULT(v[5])
+
+EQUATION("Consistency_Test")
+RESULT(SUM("Market_Share"))
+
+EQUATION("MS_Adjusted")
+
+v[0] = V("Consistency_Test");
+
+CYCLE(cur, "FIRM")
+{
+	v[1] = V("Market_Share");
+	v[2] = v[1]/v[0];
+}
+
+RESULT(v[2])
+
+EQUATION("CT_Adjusted")
+RESULT(SUM("MS_Adjusted"))
 
 MODELEND
 
